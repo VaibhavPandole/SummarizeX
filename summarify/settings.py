@@ -17,7 +17,7 @@ import environ
 
 root = Path(__file__).parent.parent  # get root of the project
 
-app_dir = f"{root}/SummarizeX/"
+app_dir = f"{root}/summarify/"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", True)
@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework_simplejwt",
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -136,3 +138,10 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+OPENAI_API_KEY = env.str("OPENAI_API_KEY")
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
+}
